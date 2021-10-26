@@ -55,7 +55,7 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
-out/
+bin/
 
 #############################
 # VisualStudio
@@ -382,3 +382,6 @@ ASALocalRun/
 
 # MSBuild Binary and Structured Log
 *.binlog
+
+# CMake out dir
+out/
