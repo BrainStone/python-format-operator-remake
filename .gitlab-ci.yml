@@ -1,0 +1,29 @@
+stages:
+  - build
+
+default:
+  cache: &global_cache
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - *.cmake
+      - CMakeFiles/
+      - CMakeCache.txt
+      - Makefile
+    policy: pull-push
+  tags:
+    - shell
+    - linux
+  before_script:
+    - cmake .
+
+build:
+  stage: build
+  cache:
+    <<: *global_cache
+    policy: push
+  needs: []
+  script:
+    - make all
+  artifacts:
+    paths:
+      - bin/*
