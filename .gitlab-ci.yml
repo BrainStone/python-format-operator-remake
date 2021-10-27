@@ -18,9 +18,6 @@ default:
 
 build:
   stage: build
-  cache:
-    <<: *global_cache
-    policy: push
   needs: []
   script:
     - make all
