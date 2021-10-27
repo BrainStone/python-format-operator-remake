@@ -12,18 +12,23 @@ std::string operator%(const std::string& format, const FormatterHelper& args) {
 }
 
 std::string operator%(const char* format, const FormatterHelper& args) {
+	int val = 43;
+	std::vector<const void*> data{reinterpret_cast<const void*>(val), reinterpret_cast<const void*>("TEST")};
+
 #ifdef _WIN32
-	// TODO: Add arguments
-	std::size_t size = snprintf(nullptr, 0, format);
+	va_list vaArgs = reinterpret_cast<va_list>(data.data());
+
+	std::size_t size = vsnprintf(nullptr, 0, format, vaArgs);
 	std::string out(size, '\0');
 
-	// TODO: Add arguments
-	sprintf_s(out.data(), size + 1, format);
+	vsprintf_s(out.data(), size + 1, format, vaArgs);
 #else
+	va_list vaArgs = {(__va_list_tag)data.data()};
+
 	char* res = nullptr;
 
-	// TODO: Add arguments
-	asprintf(&res, format, xxx);
+	//vasprintf(&res, format, vaArgs);
+	asprintf(&res, format);
 
 	std::string out{res};
 	free(res);

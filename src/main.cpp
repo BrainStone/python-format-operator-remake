@@ -2,7 +2,7 @@
 
 #include "FormatterHelper.hpp"
 
-using namespace formatter;
+using formatter::_;
 
 int main() {
 	std::cout << "Hello CMake: %d %s" % _() << std::endl;
